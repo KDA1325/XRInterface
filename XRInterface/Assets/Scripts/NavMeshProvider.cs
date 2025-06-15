@@ -14,6 +14,8 @@ public class NavMeshProvider : TeleportationProvider
     [Tooltip("이동에 사용할 NavMeshAgent")]
     private NavMeshAgent navMeshAgent;
 
+    private NavGestureController navGestureController;
+
     [SerializeField]
     [Tooltip("텔레포트 요청 후 이동 시작까지 지연 시간 (초)")]
     private float customDelayTime = 0.3f;
@@ -28,6 +30,16 @@ public class NavMeshProvider : TeleportationProvider
         currentRequest = teleportRequest;
         validRequest = true;
         return true;
+    }
+
+    private void Awake()
+    {
+        if (navGestureController == null)
+        {
+            navGestureController = FindObjectOfType<NavGestureController>();
+            if (navGestureController == null)
+                Debug.LogError("NavGestureController를 찾지 못했습니다.");
+        }
     }
 
     protected override void Update()
@@ -64,6 +76,7 @@ public class NavMeshProvider : TeleportationProvider
             if (NavMesh.SamplePosition(target, out NavMeshHit hit, 1.0f, NavMesh.AllAreas))
             {
                 navMeshAgent.SetDestination(hit.position);
+                navGestureController.RestoreSpeed();
                 Debug.Log($"[NavMeshTeleportationProvider] 목적지 설정됨: {hit.position}");
             }
             else

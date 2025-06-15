@@ -249,6 +249,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
 
         void OnStartTeleport(InputAction.CallbackContext context)
         {
+            Debug.Log("OnStartTeleport");
             m_PostponedDeactivateTeleport = false;
 
             if (m_TeleportInteractor != null)
@@ -269,6 +270,9 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             // We delay turning off the teleport interactor in this callback so that
             // the teleport interactor has a chance to complete the teleport if needed.
             // OnAfterInteractionEvents will handle deactivating its GameObject.
+
+            Debug.Log("OnCancelTeleport");
+
             m_PostponedDeactivateTeleport = true;
 
             if (m_RayInteractor != null)

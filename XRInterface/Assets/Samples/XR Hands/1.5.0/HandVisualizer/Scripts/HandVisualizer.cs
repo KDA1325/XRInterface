@@ -33,9 +33,9 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
         [Tooltip("If this is enabled, this component will enable the Input System internal feature flag 'USE_OPTIMIZED_CONTROLS'. You must have at least version 1.5.0 of the Input System and have its backend enabled for this to take effect.")]
         bool m_UseOptimizedControls;
 
-        [SerializeField]
-        [Tooltip("References either a prefab or a GameObject in the scene that will be used to visualize the left hand.")]
-        GameObject m_LeftHandMesh;
+        //[SerializeField]
+        //[Tooltip("References either a prefab or a GameObject in the scene that will be used to visualize the left hand.")]
+        //GameObject m_LeftHandMesh;
 
         [SerializeField]
         [Tooltip("References either a prefab or a GameObject in the scene that will be used to visualize the right hand.")]
@@ -97,7 +97,7 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
 
 
         XRHandSubsystem m_Subsystem;
-        HandGameObjects m_LeftHandGameObjects;
+        //HandGameObjects m_LeftHandGameObjects;
         HandGameObjects m_RightHandGameObjects;
 
         static readonly List<XRHandSubsystem> s_SubsystemsReuse = new List<XRHandSubsystem>();
@@ -121,7 +121,7 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
             if (m_Subsystem == null)
                 return;
 
-            UpdateRenderingVisibility(m_LeftHandGameObjects, m_Subsystem.leftHand.isTracked);
+            //UpdateRenderingVisibility(m_LeftHandGameObjects, m_Subsystem.leftHand.isTracked);
             UpdateRenderingVisibility(m_RightHandGameObjects, m_Subsystem.rightHand.isTracked);
         }
 
@@ -138,7 +138,7 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
                 m_Subsystem = null;
             }
 
-            UpdateRenderingVisibility(m_LeftHandGameObjects, false);
+            //UpdateRenderingVisibility(m_LeftHandGameObjects, false);
             UpdateRenderingVisibility(m_RightHandGameObjects, false);
         }
 
@@ -147,11 +147,11 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
         /// </summary>
         protected void OnDestroy()
         {
-            if (m_LeftHandGameObjects != null)
-            {
-                m_LeftHandGameObjects.OnDestroy();
-                m_LeftHandGameObjects = null;
-            }
+            //if (m_LeftHandGameObjects != null)
+            //{
+            //    m_LeftHandGameObjects.OnDestroy();
+            //    m_LeftHandGameObjects = null;
+            //}
 
             if (m_RightHandGameObjects != null)
             {
@@ -185,16 +185,16 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
             if (!foundRunningHandSubsystem)
                 return;
 
-            if (m_LeftHandGameObjects == null)
-            {
-                m_LeftHandGameObjects = new HandGameObjects(
-                    Handedness.Left,
-                    transform,
-                    m_LeftHandMesh,
-                    m_HandMeshMaterial,
-                    m_DebugDrawPrefab,
-                    m_VelocityPrefab);
-            }
+            //if (m_LeftHandGameObjects == null)
+            //{
+            //    m_LeftHandGameObjects = new HandGameObjects(
+            //        Handedness.Left,
+            //        transform,
+            //        m_LeftHandMesh,
+            //        m_HandMeshMaterial,
+            //        m_DebugDrawPrefab,
+            //        m_VelocityPrefab);
+            //}
 
             if (m_RightHandGameObjects == null)
             {
@@ -207,8 +207,8 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
                     m_VelocityPrefab);
             }
 
-            UpdateRenderingVisibility(m_LeftHandGameObjects, m_Subsystem.leftHand.isTracked);
-            UpdateRenderingVisibility(m_RightHandGameObjects, m_Subsystem.rightHand.isTracked);
+            //UpdateRenderingVisibility(m_LeftHandGameObjects, m_Subsystem.leftHand.isTracked);
+            //UpdateRenderingVisibility(m_RightHandGameObjects, m_Subsystem.rightHand.isTracked);
 
             m_PreviousDrawMeshes = m_DrawMeshes;
             m_PreviousDebugDrawJoints = m_DebugDrawJoints;
@@ -251,9 +251,9 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
         {
             switch (hand.handedness)
             {
-                case Handedness.Left:
-                    UpdateRenderingVisibility(m_LeftHandGameObjects, true);
-                    break;
+                //case Handedness.Left:
+                //    UpdateRenderingVisibility(m_LeftHandGameObjects, true);
+                //    break;
 
                 case Handedness.Right:
                     UpdateRenderingVisibility(m_RightHandGameObjects, true);
@@ -265,9 +265,9 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
         {
             switch (hand.handedness)
             {
-                case Handedness.Left:
-                    UpdateRenderingVisibility(m_LeftHandGameObjects, false);
-                    break;
+                //case Handedness.Left:
+                //    UpdateRenderingVisibility(m_LeftHandGameObjects, false);
+                //    break;
 
                 case Handedness.Right:
                     UpdateRenderingVisibility(m_RightHandGameObjects, false);
@@ -288,30 +288,30 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
 
             if (m_PreviousDrawMeshes != m_DrawMeshes)
             {
-                m_LeftHandGameObjects.ToggleDrawMesh(m_DrawMeshes);
+                //m_LeftHandGameObjects.ToggleDrawMesh(m_DrawMeshes);
                 m_RightHandGameObjects.ToggleDrawMesh(m_DrawMeshes);
                 m_PreviousDrawMeshes = m_DrawMeshes;
             }
 
             if (m_PreviousDebugDrawJoints != m_DebugDrawJoints)
             {
-                m_LeftHandGameObjects.ToggleDebugDrawJoints(m_DebugDrawJoints && leftHandTracked);
+                //m_LeftHandGameObjects.ToggleDebugDrawJoints(m_DebugDrawJoints && leftHandTracked);
                 m_RightHandGameObjects.ToggleDebugDrawJoints(m_DebugDrawJoints && rightHandTracked);
                 m_PreviousDebugDrawJoints = m_DebugDrawJoints;
             }
 
             if (m_PreviousVelocityType != m_VelocityType)
             {
-                m_LeftHandGameObjects.SetVelocityType(leftHandTracked ? m_VelocityType : VelocityType.None);
+                //m_LeftHandGameObjects.SetVelocityType(leftHandTracked ? m_VelocityType : VelocityType.None);
                 m_RightHandGameObjects.SetVelocityType(rightHandTracked ? m_VelocityType : VelocityType.None);
                 m_PreviousVelocityType = m_VelocityType;
             }
 
-            m_LeftHandGameObjects.UpdateJoints(
-                subsystem.leftHand,
-                (updateSuccessFlags & XRHandSubsystem.UpdateSuccessFlags.LeftHandJoints) != 0,
-                m_DebugDrawJoints,
-                m_VelocityType);
+            //m_LeftHandGameObjects.UpdateJoints(
+            //    subsystem.leftHand,
+            //    (updateSuccessFlags & XRHandSubsystem.UpdateSuccessFlags.LeftHandJoints) != 0,
+            //    m_DebugDrawJoints,
+            //    m_VelocityType);
 
             m_RightHandGameObjects.UpdateJoints(
                 subsystem.rightHand,
